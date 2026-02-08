@@ -4,29 +4,37 @@
 
 .small-box {
   @include border-radius($border-radius);
-  @include box-shadow($lte-card-shadow);
+  @include box-shadow(0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06));
   position: relative;
   display: block;
   margin-bottom: 1.25rem;
   --bs-link-color-rgb: none;
   --bs-link-hover-color-rgb: none;
   --bs-heading-color: none;
+  overflow: hidden;
+  @include transition(all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
   // content wrapper
   > .inner {
-    padding: 10px;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
   }
 
   > .small-box-footer {
     position: relative;
     z-index: 10;
     display: block;
-    padding: 3px 0;
+    padding: 8px 0;
     text-align: center;
-    background-color: rgba($black, .07);
+    background-color: rgba($black, .1);
+    @include transition(all 0.3s ease);
+    backdrop-filter: blur(10px);
 
     &:hover {
-      background-color: rgba($black, .1);
+      background-color: rgba($black, .15);
+      transform: translateY(-1px);
     }
   }
 
@@ -36,6 +44,8 @@
     margin: 0 0 10px;
     font-weight: 700;
     white-space: nowrap;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    @include transition(all 0.3s ease);
   }
 
   @include media-breakpoint-up(lg) {
@@ -76,6 +86,8 @@
 
   p {
     font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.95;
 
     > small {
       display: block;
@@ -93,20 +105,64 @@
   // the icon
   .small-box-icon {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 20px;
+    right: 20px;
     z-index: 0;
-    height: 70px;
-    font-size: 70px;
-    color: rgba($black, .15);
-    @include transition(transform $lte-transition-speed linear);
+    height: 80px;
+    width: 80px;
+    font-size: 80px;
+    color: rgba($black, .12);
+    opacity: 0.6;
+    @include transition(all 0.4s cubic-bezier(0.4, 0, 0.2, 1));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
   }
 
   // Small box hover state
   &:hover {
+    transform: translateY(-4px);
+    @include box-shadow(0 12px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1));
+    border-color: rgba(255, 255, 255, 0.2);
+
     // Animate icons on small box hover
     .small-box-icon {
-      transform: scale(1.1);
+      transform: scale(1.15) rotate(5deg);
+      opacity: 0.8;
+    }
+
+    h3 {
+      transform: scale(1.05);
+    }
+  }
+
+  // Enhanced styles for colored variants
+  &[class*="text-bg-"] {
+    background: linear-gradient(135deg, var(--#{$lte-prefix}card-variant-bg) 0%, rgba(var(--#{$lte-prefix}card-variant-bg-rgb), 0.85) 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .small-box-icon {
+      color: rgba(255, 255, 255, 0.25);
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+    }
+
+    &:hover {
+      background: linear-gradient(135deg, var(--#{$lte-prefix}card-variant-bg) 0%, rgba(var(--#{$lte-prefix}card-variant-bg-rgb), 0.9) 100%);
+      border-color: rgba(255, 255, 255, 0.3);
+
+      .small-box-icon {
+        color: rgba(255, 255, 255, 0.35);
+      }
     }
   }
 }
@@ -115,13 +171,26 @@
   // No need for icons on very small devices
   .small-box {
     text-align: center;
+    margin-bottom: 1rem;
 
     .small-box-icon {
       display: none;
     }
 
+    > .inner {
+      padding: 15px;
+    }
+
+    h3 {
+      @include font-size(1.5rem);
+    }
+
     p {
-      font-size: 12px;
+      font-size: 0.875rem;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
     }
   }
 }

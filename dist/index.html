@@ -77,6 +77,251 @@
       integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4="
       crossorigin="anonymous"
     />
+    <style>
+      /* ============================================
+         Современная цветовая схема: темный сайдбар + светлый контент
+         ============================================ */
+      
+      /* Темный сайдбар */
+      .app-sidebar {
+        background: linear-gradient(180deg, #1a1d29 0%, #161922 100%) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3) !important;
+      }
+      
+      .sidebar-brand {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+      }
+      
+      .brand-text {
+        color: #ffffff !important;
+        font-weight: 600;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+      
+      /* Пункты меню в сайдбаре */
+      .sidebar-menu .nav-link {
+        color: rgba(255, 255, 255, 0.8) !important;
+        border-radius: 8px;
+        margin: 2px 8px;
+        padding: 10px 15px !important;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+      
+      .sidebar-menu .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: #ffffff !important;
+        transform: translateX(4px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+      
+      .sidebar-menu .nav-link.active {
+        background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+      }
+      
+      .sidebar-menu .nav-link.active::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: #ffffff;
+        border-radius: 0 3px 3px 0;
+      }
+      
+      .nav-icon {
+        margin-right: 10px;
+        font-size: 1.1rem;
+      }
+      
+      /* Светлый контент */
+      .app-main {
+        background: #f8f9fa;
+      }
+      
+      .app-content-header {
+        background: #ffffff;
+        border-bottom: 1px solid #e9ecef;
+        padding: 1.5rem 0;
+      }
+      
+      .app-content-header h3 {
+        color: #212529;
+        font-weight: 600;
+      }
+      
+      /* ============================================
+         Улучшенные карточки метрик (small-box)
+         ============================================ */
+      
+      .small-box {
+        border-radius: 12px !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06) !important;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+      }
+      
+      .small-box > .inner {
+        padding: 24px 20px !important;
+        position: relative;
+        z-index: 2;
+      }
+      
+      .small-box h3 {
+        font-size: 2.5rem !important;
+        font-weight: 700;
+        margin-bottom: 8px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: #ffffff;
+        line-height: 1.2;
+      }
+      
+      .small-box p {
+        font-size: 1rem;
+        font-weight: 500;
+        margin: 0;
+        opacity: 0.95;
+        color: rgba(255, 255, 255, 0.95);
+      }
+      
+      .small-box-icon {
+        opacity: 0.15 !important;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        transition: all 0.4s ease;
+      }
+      
+      .small-box-footer {
+        background: rgba(0, 0, 0, 0.15) !important;
+        padding: 10px 0 !important;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+      
+      .small-box-footer:hover {
+        background: rgba(0, 0, 0, 0.25) !important;
+        transform: translateY(-1px);
+      }
+      
+      /* Hover эффект на карточки метрик */
+      .small-box:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+      
+      .small-box:hover .small-box-icon {
+        transform: scale(1.15) rotate(5deg);
+        opacity: 0.25 !important;
+      }
+      
+      .small-box:hover h3 {
+        transform: scale(1.05);
+      }
+      
+      /* Градиенты для цветных карточек */
+      .small-box.text-bg-primary {
+        background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+      }
+      
+      .small-box.text-bg-success {
+        background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%) !important;
+      }
+      
+      .small-box.text-bg-warning {
+        background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%) !important;
+      }
+      
+      .small-box.text-bg-danger {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+      }
+      
+      /* ============================================
+         Улучшенные карточки (card)
+         ============================================ */
+      
+      .card {
+        border-radius: 12px !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+        border: 1px solid #e9ecef;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        background: #ffffff;
+      }
+      
+      .card-header {
+        background: linear-gradient(to bottom, rgba(248, 249, 250, 0.5), transparent);
+        border-bottom: 1px solid #e9ecef;
+        padding: 1rem 1.25rem;
+      }
+      
+      .card-title {
+        font-weight: 600;
+        color: #212529;
+        font-size: 1.1rem;
+      }
+      
+      .card-body {
+        padding: 1.25rem;
+      }
+      
+      /* Hover эффект на карточки */
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08) !important;
+        border-color: #dee2e6;
+      }
+      
+      /* ============================================
+         Дополнительные улучшения
+         ============================================ */
+      
+      .app-content {
+        padding: 1.5rem;
+      }
+      
+      .breadcrumb {
+        background: transparent;
+        padding: 0;
+      }
+      
+      .breadcrumb-item a {
+        color: #6c757d;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+      
+      .breadcrumb-item a:hover {
+        color: #007bff;
+      }
+      
+      /* Анимация появления */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .app-content {
+        animation: fadeIn 0.5s ease-in-out;
+      }
+      
+      /* Улучшенные отступы для строк с карточками */
+      .row > [class*="col-"] {
+        margin-bottom: 1.5rem;
+      }
+    </style>
   </head>
   <!--end::Head-->
   <!--begin::Body-->

@@ -3,7 +3,7 @@
 //
 
 .info-box {
-  @include box-shadow($lte-card-shadow);
+  @include box-shadow(0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06));
   @include border-radius($border-radius);
 
   position: relative;
@@ -14,6 +14,15 @@
   margin-bottom: map-get($spacers, 3);
   color: var(--#{$prefix}body-color);
   background-color: var(--#{$prefix}body-bg);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  @include transition(all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-2px);
+    @include box-shadow(0 8px 16px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08));
+    border-color: rgba(0, 0, 0, 0.1);
+  }
 
   .progress {
     height: 2px;
@@ -33,10 +42,25 @@
     font-size: 1.875rem;
     text-align: center;
     @include border-radius($border-radius);
+    @include transition(all 0.3s ease);
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      @include border-radius($border-radius);
+      opacity: 0;
+      @include transition(opacity 0.3s ease);
+    }
 
     > img {
       max-width: 100%;
     }
+  }
+
+  &:hover .info-box-icon {
+    transform: scale(1.1);
   }
 
   .info-box-content {
@@ -52,6 +76,71 @@
     display: block;
     margin-top: .25rem;
     font-weight: $font-weight-bold;
+    @include transition(all 0.3s ease);
+  }
+
+  &:hover .info-box-number {
+    transform: scale(1.05);
+  }
+
+  // Enhanced styles for colored variants
+  &[class*="text-bg-"] {
+    background: linear-gradient(135deg, var(--#{$lte-prefix}card-variant-bg) 0%, rgba(var(--#{$lte-prefix}card-variant-bg-rgb), 0.9) 100%);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: var(--#{$lte-prefix}card-variant-color);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .info-box-icon {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      &::before {
+        background: rgba(255, 255, 255, 0.2);
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      background: linear-gradient(135deg, var(--#{$lte-prefix}card-variant-bg) 0%, rgba(var(--#{$lte-prefix}card-variant-bg-rgb), 0.95) 100%);
+      border-color: rgba(255, 255, 255, 0.25);
+
+      .info-box-icon {
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+
+  .info-box-icon[class*="text-bg-"] {
+    background: linear-gradient(135deg, var(--#{$lte-prefix}card-variant-bg) 0%, rgba(var(--#{$lte-prefix}card-variant-bg-rgb), 0.9) 100%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    @include transition(all 0.3s ease);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+      @include border-radius($border-radius);
+      opacity: 1;
+    }
+
+    &:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
   }
 
   .progress-description,
